@@ -1,0 +1,134 @@
+[
+  {
+    "id": "1",
+    "name": "Chicken Biryani",
+    "category": "Meals",
+    "price": 85,
+    "description": "Fragrant basmati rice cooked with tender chicken, aromatic spices and caramelised onions. Served with raita.",
+    "imageUrl": "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=400&q=80",
+    "rating": 4.8,
+    "prepTime": "15 min",
+    "popular": true
+  },
+  {
+    "id": "2",
+    "name": "Veg Thali",
+    "category": "Meals",
+    "price": 60,
+    "description": "Wholesome plate with rice, dal, two curries, roti, salad and pickle. The perfect balanced meal.",
+    "imageUrl": "https://images.unsplash.com/photo-1546833998-877b37c2e5c6?w=400&q=80",
+    "rating": 4.5,
+    "prepTime": "10 min",
+    "popular": false
+  },
+  {
+    "id": "3",
+    "name": "Paneer Butter Masala",
+    "category": "Meals",
+    "price": 75,
+    "description": "Rich, creamy tomato-based curry with soft paneer cubes. Best enjoyed with naan or rice.",
+    "imageUrl": "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=400&q=80",
+    "rating": 4.6,
+    "prepTime": "12 min",
+    "popular": true
+  },
+  {
+    "id": "4",
+    "name": "Egg Fried Rice",
+    "category": "Meals",
+    "price": 55,
+    "description": "Wok-tossed basmati rice with scrambled eggs, mixed vegetables and soy seasoning.",
+    "imageUrl": "https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=400&q=80",
+    "rating": 4.3,
+    "prepTime": "8 min",
+    "popular": false
+  },
+  {
+    "id": "5",
+    "name": "Masala Chai",
+    "category": "Beverages",
+    "price": 15,
+    "description": "Classic Indian spiced tea brewed with ginger, cardamom, cinnamon and strong Assam tea leaves.",
+    "imageUrl": "https://images.unsplash.com/photo-1594631252845-29fc4cc8cde9?w=400&q=80",
+    "rating": 4.9,
+    "prepTime": "3 min",
+    "popular": true
+  },
+  {
+    "id": "6",
+    "name": "Cold Coffee",
+    "category": "Beverages",
+    "price": 40,
+    "description": "Chilled blended coffee with milk and a hint of vanilla. Thick, creamy and energising.",
+    "imageUrl": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?w=400&q=80",
+    "rating": 4.7,
+    "prepTime": "5 min",
+    "popular": true
+  },
+  {
+    "id": "7",
+    "name": "Mango Lassi",
+    "category": "Beverages",
+    "price": 35,
+    "description": "Sweet and tangy blended yoghurt drink with Alphonso mango pulp. Refreshing and filling.",
+    "imageUrl": "https://images.unsplash.com/photo-1527661591475-527312dd65f5?w=400&q=80",
+    "rating": 4.8,
+    "prepTime": "4 min",
+    "popular": false
+  },
+  {
+    "id": "8",
+    "name": "Lemon Soda",
+    "category": "Beverages",
+    "price": 20,
+    "description": "Freshly squeezed lemon with chilled soda, a pinch of black salt and mint. Perfect on a hot day.",
+    "imageUrl": "https://images.unsplash.com/photo-1621263764928-df1444c5e859?w=400&q=80",
+    "rating": 4.4,
+    "prepTime": "2 min",
+    "popular": false
+  },
+  {
+    "id": "9",
+    "name": "Samosa (2 pcs)",
+    "category": "Snacks",
+    "price": 20,
+    "description": "Crispy golden pastry filled with spiced potato and peas. Served with tamarind and mint chutney.",
+    "imageUrl": "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=400&q=80",
+    "rating": 4.7,
+    "prepTime": "5 min",
+    "popular": true
+  },
+  {
+    "id": "10",
+    "name": "Vada Pav",
+    "category": "Snacks",
+    "price": 18,
+    "description": "Mumbai's iconic street food — a spiced potato fritter in a soft bun with dry garlic chutney.",
+    "imageUrl": "https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=400&q=80",
+    "rating": 4.6,
+    "prepTime": "5 min",
+    "popular": true
+  },
+  {
+    "id": "11",
+    "name": "Bread Omelette",
+    "category": "Snacks",
+    "price": 30,
+    "description": "Two-egg masala omelette served between buttered bread slices. A canteen breakfast classic.",
+    "imageUrl": "https://images.unsplash.com/photo-1510693206972-df098062cb71?w=400&q=80",
+    "rating": 4.4,
+    "prepTime": "7 min",
+    "popular": false
+  },
+  {
+    "id": "12",
+    "name": "French Fries",
+    "category": "Snacks",
+    "price": 45,
+    "description": "Crispy golden fries seasoned with chaat masala and served with ketchup. Great with any drink!",
+    "imageUrl": "https://images.unsplash.com/photo-1576107232684-1279f390859f?w=400&q=80",
+    "rating": 4.5,
+    "prepTime": "8 min",
+    "popular": false
+  }
+]
