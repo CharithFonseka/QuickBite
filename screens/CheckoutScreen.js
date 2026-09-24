@@ -50,8 +50,8 @@ export default function CheckoutScreen({ navigation }) {
 
       clearCart(); // Empty the cart after placing the order
 
-      // Navigate to tracking — replace so user can't go "back" to checkout
-      navigation.replace('OrderTracking', { orderId, pickupTime });
+      // Navigate to Order Confirmation — it auto-redirects to OrderTracking after 3s
+      navigation.replace('OrderConfirmation', { orderId, pickupTime });
     }, 1200);
   };
 
