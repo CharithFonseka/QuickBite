@@ -19,7 +19,7 @@
 | TC-05 | Cart Quantity Update | 1. Add the same item to the cart multiple times using the "+" button on the Home screen. <br> 2. Navigate to Cart. | The cart shows one row for that item with the correct cumulative quantity. The subtotal for that row (quantity × price) is accurate. | |
 | TC-06 | Cart Total Calculation | 1. Add 2–3 different items with known prices to the cart. <br> 2. Navigate to the Cart screen. | The "Subtotal" line equals the sum of (price × quantity) for all items. "GST (5%)" equals 5% of the subtotal. "Total" equals Subtotal + GST. | |
 | TC-07 | Remove Item from Cart | 1. Add an item to the cart. <br> 2. Open Cart screen. <br> 3. Tap the "🗑" / "−" button until quantity reaches 0, OR tap "✕" on the item row. | The item is removed from the cart. If the cart becomes empty, the empty-state UI (with "Browse Menu" button) is displayed. | |
-| TC-08 | Checkout Flow | 1. Add at least one item to the cart. <br> 2. Navigate to Cart. <br> 3. Tap "Proceed to Checkout". <br> 4. Review the order summary on Checkout screen. <br> 5. Tap "Place Order". | A loading spinner appears briefly, then the app navigates to the Order Tracking screen showing a generated Order ID (format QB-XXXX) and an estimated pickup time (now + 15 min). The cart is cleared (cart badge disappears). | |
+| TC-08 | Checkout Flow | 1. Add at least one item to the cart. <br> 2. Navigate to Cart. <br> 3. Tap "Proceed to Checkout". <br> 4. Review the order summary on Checkout screen. <br> 5. Tap "Place Order". | A loading spinner appears briefly, then the Order Confirmation screen appears with the generated Order ID (format QB-XXXX) and estimated pickup time (now + 15 min). Cart badge disappears. | |
 | TC-09 | Order Status Progression | 1. Place an order to reach the Order Tracking screen. <br> 2. Wait 4 seconds. <br> 3. Wait another 4 seconds. | Status auto-advances: "Order Placed" → "Preparing" → "Ready for Pickup". The progress indicator shows each step as completed (green checkmark). The status card emoji and description update. | |
 | TC-10 | Manual Status Advance | 1. Reach the Order Tracking screen after placing an order. <br> 2. Tap the "⏭ Next Status (Demo)" button. | Status advances immediately to the next step without waiting for the 4-second timer. The button disappears when the final status "Ready for Pickup" is reached. | |
 | TC-11 | Search Filter | 1. On the Home screen, type "chai" in the search bar. | Only items whose names contain "chai" (case-insensitive) are shown in the grid. Other items are hidden. Clearing the search bar restores all items. | |
@@ -27,6 +27,8 @@
 | TC-13 | Profile Name Edit | 1. Log in (not as guest) and navigate to Profile via the header button. <br> 2. Tap "✏️ Edit" next to the profile name. <br> 3. Clear the input and tap "Save". | An alert appears: "Name cannot be empty". Name is not saved. <br> Entering a valid name and tapping Save updates the displayed name and closes the edit field. | |
 | TC-14 | Layout on Tablet | 1. Run the app on a tablet-sized emulator (e.g. 10-inch). <br> 2. Browse the Home screen and Cart screen. | The two-column card grid remains usable and cards are not stretched unusually wide. All text is readable and buttons are tappable. Layout uses flex-based sizing — no fixed pixel widths cause overflow. | |
 | TC-15 | Back Navigation | 1. Navigate: Home → ItemDetail → Cart → back button. | Each back press returns to the previous screen correctly. Pressing back on the Home screen does not navigate to Login (since `replace` was used). | |
+| TC-16 | Order Confirmation Screen | 1. Add items to cart. <br> 2. Go to Checkout and tap "Place Order". <br> 3. Observe the screen that appears. | An animated green checkmark appears on the Order Confirmation screen, showing the Order ID, pickup time, and counter location. After 3 seconds it automatically navigates to the Order Tracking screen. Tapping "Track My Order" navigates immediately. | |
+| TC-17 | Profile Photo Upload | 1. Navigate to Profile screen. <br> 2. Tap the avatar circle (📷 badge visible in corner). <br> 3. Grant photo library permission when prompted. <br> 4. Select any photo from gallery. | The selected photo appears cropped to a square as the avatar. Tapping the avatar shows options: "Change Photo" and "Remove Photo". Tapping "Remove Photo" restores the initials-based avatar. | |
 
 ---
 
@@ -36,6 +38,8 @@
 - App uses **no real backend** — all data is local/mock.
 - For TC-09 and TC-10, the status auto-advances every **4 seconds** by default.
 - Prices in the app are in **Indian Rupees (₹)**.
+- TC-17 requires a physical device or simulator with photo library access granted.
+- Order Confirmation screen (TC-16) auto-redirects to Order Tracking after **3 seconds**.
 
 ---
 
