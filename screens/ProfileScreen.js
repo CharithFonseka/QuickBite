@@ -1,5 +1,6 @@
 // screens/ProfileScreen.js
-// Displays user profile info and a mock order history list
+// Displays user profile info with a tappable profile photo (expo-image-picker)
+// and a mock order history list
 
 import React, { useState } from 'react';
 import {
@@ -10,7 +11,9 @@ import {
   StyleSheet,
   TouchableOpacity,
   Alert,
+  Image,
 } from 'react-native';
+import * as ImagePicker from 'expo-image-picker';
 import { COLORS, FONTS, SPACING, RADIUS, SHADOWS } from '../theme';
 
 // ─── Mock Order History ────────────────────────────────────────────────────────
@@ -48,6 +51,9 @@ export default function ProfileScreen({ route }) {
   const [editing, setEditing] = useState(false);
   const [tempName, setTempName] = useState(name);
 
+  // profilePhoto holds the local URI of the selected image (null = show initials)
+  const [profilePhoto, setProfilePhoto] = useState(null);
+
   const saveName = () => {
     if (!tempName.trim()) {
       Alert.alert('Name cannot be empty');
@@ -57,7 +63,53 @@ export default function ProfileScreen({ route }) {
     setEditing(false);
   };
 
-  // Avatar initials from name
+  // ─── Photo Picker ────────────────────────────────────────────────────────────
+  // Asks for gallery permission, then opens the image picker
+  const pickProfilePhoto = async () => {
+    // Request permission to access the media library
+    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+
+    if (status !== 'granted') {
+      Alert.alert(
+        'Permission Required',
+        'Please allow access to your photo library to set a profile picture.',
+        [{ text: 'OK' }]
+      );
+      return;
+    }
+
+    // Launch the image picker; allowsEditing lets user crop to a square
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ['images'],   // Photos only (no videos)
+      allowsEditing: true,      // Shows crop/resize UI
+      aspect: [1, 1],           // Force square crop for avatar
+      quality: 0.7,             // Compress to 70% to keep file size small
+    });
+
+    // result.canceled is true if the user pressed "Cancel"
+    if (!result.canceled && result.assets && result.assets.length > 0) {
+      setProfilePhoto(result.assets[0].uri);
+    }
+  };
+
+  // Show option to change or remove photo
+  const handleAvatarPress = () => {
+    if (profilePhoto) {
+      Alert.alert('Profile Photo', 'What would you like to do?', [
+        { text: 'Change Photo', onPress: pickProfilePhoto },
+        {
+          text: 'Remove Photo',
+          style: 'destructive',
+          onPress: () => setProfilePhoto(null),
+        },
+        { text: 'Cancel', style: 'cancel' },
+      ]);
+    } else {
+      pickProfilePhoto();
+    }
+  };
+
+  // Avatar initials (fallback when no photo is selected)
   const initials = name.slice(0, 2).toUpperCase();
 
   return (
@@ -65,9 +117,29 @@ export default function ProfileScreen({ route }) {
 
       {/* ─── Profile Header ─── */}
       <View style={styles.profileHeader}>
-        <View style={styles.avatar}>
-          <Text style={styles.avatarText}>{initials}</Text>
-        </View>
+
+        {/* Tappable avatar — shows photo if selected, else initials */}
+        <TouchableOpacity
+          style={styles.avatarWrapper}
+          onPress={handleAvatarPress}
+          activeOpacity={0.85}
+        >
+          {profilePhoto ? (
+            <Image
+              source={{ uri: profilePhoto }}
+              style={styles.avatarImage}
+            />
+          ) : (
+            <View style={styles.avatarInitials}>
+              <Text style={styles.avatarText}>{initials}</Text>
+            </View>
+          )}
+
+          {/* Camera icon overlay so user knows it's tappable */}
+          <View style={styles.cameraOverlay}>
+            <Text style={styles.cameraIcon}>📷</Text>
+          </View>
+        </TouchableOpacity>
 
         {editing ? (
           <View style={styles.editRow}>
@@ -99,6 +171,7 @@ export default function ProfileScreen({ route }) {
         )}
 
         <Text style={styles.profileEmail}>{isGuest ? 'Guest User' : userEmail}</Text>
+        <Text style={styles.tapHint}>Tap photo to change</Text>
       </View>
 
       {/* ─── Stats Row ─── */}
@@ -167,21 +240,49 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: RADIUS.xl + 8,
     borderBottomRightRadius: RADIUS.xl + 8,
   },
-  avatar: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
+  avatarWrapper: {
+    marginBottom: SPACING.md,
+    position: 'relative',
+  },
+  avatarImage: {
+    width: 90,
+    height: 90,
+    borderRadius: 45,
+    borderWidth: 3,
+    borderColor: 'rgba(255,255,255,0.7)',
+  },
+  avatarInitials: {
+    width: 90,
+    height: 90,
+    borderRadius: 45,
     backgroundColor: 'rgba(255,255,255,0.25)',
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: 3,
     borderColor: 'rgba(255,255,255,0.5)',
-    marginBottom: SPACING.md,
   },
   avatarText: {
     fontSize: FONTS.size.xl + 4,
     fontWeight: '900',
     color: COLORS.white,
+  },
+  // Small camera badge in the bottom-right corner of the avatar
+  cameraOverlay: {
+    position: 'absolute',
+    bottom: 0,
+    right: 0,
+    backgroundColor: COLORS.white,
+    width: 28,
+    height: 28,
+    borderRadius: 14,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 2,
+    borderColor: COLORS.primary,
+    ...SHADOWS.sm,
+  },
+  cameraIcon: {
+    fontSize: 13,
   },
   nameRow: {
     flexDirection: 'row',
@@ -243,6 +344,12 @@ const styles = StyleSheet.create({
   profileEmail: {
     fontSize: FONTS.size.sm,
     color: 'rgba(255,255,255,0.8)',
+    marginBottom: 4,
+  },
+  tapHint: {
+    fontSize: FONTS.size.xs,
+    color: 'rgba(255,255,255,0.55)',
+    fontStyle: 'italic',
   },
   statsRow: {
     flexDirection: 'row',
